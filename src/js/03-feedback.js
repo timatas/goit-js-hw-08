@@ -12,7 +12,6 @@ function onInput(evt) {
   };
 
   localStorage.setItem(localStorageKey, JSON.stringify(userInput));
-  console.log(userInput);
 }
 if (localStorage.length !== 0) {
   form.email.value = JSON.parse(localStorage.getItem(localStorageKey)).email;
@@ -24,6 +23,18 @@ if (localStorage.length !== 0) {
 form.addEventListener('submit', onSubmitListener);
 function onSubmitListener(evt) {
   evt.preventDefault();
+  const userInput = {
+    email: form.email.value,
+    message: form.message.value,
+  };
+  console.log(userInput);
+
+  if (this.email.value === '' || this.message.value === '') {
+    return alert(
+      'Ви не заповнили потрібні поля!!! Будь ласка, заповніть усі поля!'
+    );
+  }
+
   localStorage.clear();
   form.reset();
 }
